@@ -151,30 +151,34 @@
 		_checkUpdateBounds: function(targetInfo) {
 			var eleWidth = this.ele.outerWidth();
 			var eleHeight = this.ele.outerHeight();
-			var elePos = this.ele.position();
+			var eleOffset = this.ele.offset();
+			var pOffset = this._curTarget.parent().offset();
 
-			var c1 = targetInfo.left + targetInfo.width;
-			var c2 = elePos.left + eleWidth;
+			var targetLeft = pOffset.left + targetInfo.left;
+			var targetTop = pOffset.top + targetInfo.top;
+			
+			var c1 = targetLeft + targetInfo.width;
+			var c2 = eleOffset.left + eleWidth;
 			if (c1 > c2) {
 				// 右侧超出
 				targetInfo.left -= c1 - c2;
 			}
 
-			c1 = targetInfo.left;
-			c2 = elePos.left;
+			c1 = targetLeft;
+			c2 = eleOffset.left;
 			if (c1 < c2) {
 				targetInfo.left += c2 - c1;
 			}
 
-			c1 = targetInfo.top + targetInfo.height;
-			c2 = elePos.top + eleHeight;
+			c1 = targetTop + targetInfo.height;
+			c2 = eleOffset.top + eleHeight;
 			if (c1 > c2) {
 				// 底部超出
 				targetInfo.top -= c1 - c2;
 			}
 
-			c1 = targetInfo.top;
-			c2 = elePos.top;
+			c1 = targetTop;
+			c2 = eleOffset.top;
 			if (c1 < c2) {
 				targetInfo.top += c2 - c1;
 			}
