@@ -55,7 +55,7 @@
 		 * @param  {Object} e 事件对象
 		 */
 		_onEnter: function(e) {
-			var _curTarget = $(e.target);
+			var _curTarget = $(e.currentTarget);
 			var data = _curTarget.data('originInfo');
 			if (!data) {
 				// 保存data数据
