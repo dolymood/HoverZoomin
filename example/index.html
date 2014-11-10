@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>HoverZoomin</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../src/HoverZoomin.js"></script>
+</head>
+<body>
+
+	<div class="container">
+		<ul>
+			<li>1
+			<li>2
+			<li>3
+			<li>4
+			<li>5
+			<li>6
+			<li>7
+			<li>8
+			<li>9
+			<li>10
+		</ul>	
+	</div>
+	<script type="text/javascript">
+	var hoverZoomin = new HoverZoomin('.container', {
+		selector: 'li',
+		hziTo: {
+			width: 200,
+			height: 200
+		}
+	});
+	</script>
+</body>
+</html>
