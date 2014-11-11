@@ -188,10 +188,10 @@
 
 	// 支持MD
 	if (typeof module === 'object' && module && typeof module.exports === 'object') {
-		module.exports = Timeline;
+		module.exports = HoverZoomin;
 	} else {
 		if (typeof define === 'function' && define.amd) {
-			define([], function() { return Timeline; });
+			define([], function() { return HoverZoomin; });
 		}
 	}
 
