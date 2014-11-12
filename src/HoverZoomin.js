@@ -18,7 +18,7 @@
 		hziTo: {
 			width: 300,
 			height:300,
-			zIndex: 5
+			zIndex: 10
 		}
 
 	};
@@ -30,8 +30,9 @@
 	 */
 	function HoverZoomin(ele, options) {
 		this.ele = $(ele);
-		this.options = $.extend({}, OPTIONS, options);
+		this.options = $.extend(true, {}, OPTIONS, options);
 
+		this._enable = true;
 		this._curTarget = null;
 		this.enterCls = 'hzi-enter';
 		this.selector = this.options.selector + ':not(.' + this.enterCls + ')';
@@ -51,10 +52,25 @@
 		},
 
 		/**
+		 * 设为可用状态
+		 */
+		enable: function() {
+			this._enable = true;
+		},
+
+		/**
+		 * 设为不可用状态
+		 */
+		disable: function() {
+			this._enable = false;
+		},
+
+		/**
 		 * mouseEnter处理函数
 		 * @param  {Object} e 事件对象
 		 */
 		_onEnter: function(e) {
+			if (!this._enable) return;
 			var _curTarget = $(e.currentTarget);
 			var data = _curTarget.data('originInfo');
 			if (!data) {
@@ -107,6 +123,7 @@
 		 * @param  {Boolean} hard 是否强制移除
 		 */
 		_onLeave: function(e, hard) {
+			if (!this._enable) return;
 			var _curTarget = this._curTarget;
 			var _orTarget = this._orTarget;
 			var originInfo;
