@@ -33,7 +33,7 @@
 		this.options = $.extend(true, {}, OPTIONS, options);
 
 		this._enable = true;
-		this._curTarget = null;
+		this._curTarget = this._orTarget = null;
 		this.enterCls = 'hzi-enter';
 		this.selector = this.options.selector + ':not(.' + this.enterCls + ')';
 
@@ -47,8 +47,10 @@
 		 * 初始化
 		 */
 		init: function() {
-			this.ele.delegate(this.selector, 'mouseenter', $.proxy(this._onEnter, this));
-			this.ele.delegate(this.selector, 'mouseleave', $.proxy(this._onLeave, this));
+			this._onEnterHandler = $.proxy(this._onEnter, this);
+			this._onLeaveHandler = $.proxy(this._onLeave, this);
+			this.ele.delegate(this.selector, 'mouseenter', this._onEnterHandler);
+			this.ele.delegate(this.selector, 'mouseleave', this._onLeaveHandler);
 		},
 
 		/**
@@ -199,6 +201,20 @@
 			if (c1 < c2) {
 				targetInfo.top += c2 - c1;
 			}
+		},
+
+		/**
+		 * 销毁
+		 */
+		destroy: function() {
+			this.ele.off('mouseenter', this._onEnterHandler);
+			this.ele.off('mouseleave', this._onLeaveHandler);
+			this._onEnterHandler = null;
+			this._onLeaveHandler = null;
+			this.ele = null;
+			this.options = null;
+			this._curTarget = null;
+			this._orTarget = null;
 		}
 
 	});
